@@ -22,7 +22,7 @@ init() {
 		logsh "【$service】" "未配置安装路径！" 
 		exit
 	fi
-	[ ! -f $BIN ] && mount -o blind $path /opt > /dev/null 2>&1
+	[ ! -f $BIN ] && mount -o bind $path /opt > /dev/null 2>&1
 	[ -z "$profilepath" ] && logsh "【$service】" "工具箱环境变量出现问题！" && end
 	result1=$(echo $profilepath | grep -c /opt/sbin)
 	result2=$(echo $libpath | grep -c /opt/lib)
@@ -35,7 +35,7 @@ init() {
 		mkdir -p $path > /dev/null 2>&1
 		[ $? -ne 0 ] && logsh "【Tools】" "创建目录失败，检查你的路径是否正确！" && end
 		umount -lf /opt > /dev/null 2>&1
-		mount -o blind $path /opt
+		mount -o bind $path /opt
 		if [ "$xq" == "R3D" ]; then
 			wget -O - http://bin.entware.net/armv7sf-k3.2/installer/generic.sh | sh
 		elif [ "$model" == "arm" ]; then
