@@ -22,7 +22,7 @@ init() {
 		logsh "【$service】" "未配置安装路径！" 
 		exit
 	fi
-	[ ! -f $BIN ] && mount -o blind $path /opt > /dev/null 2>&1
+	[ ! -f $BIN ] && mount -o bind $path /opt > /dev/null 2>&1
 	[ -z "$profilepath" ] && logsh "【$service】" "工具箱环境变量出现问题！" && end
 	result1=$(echo $profilepath | grep -c /opt/sbin)
 	result2=$(echo $libpath | grep -c /opt/lib)
